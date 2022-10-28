@@ -47,11 +47,11 @@ settings =
 	--
 	plugins = 
 	{
-		["plugin.androidFilePicker"] =
-      	{
-	     	publisherId = "tech.scotth",
-	    		marketplaceId="o7tfaq",
-       	},
+	--	["plugin.androidFilePicker"] =
+    --  	{
+	--     	publisherId = "tech.scotth",
+	--    		marketplaceId="o7tfaq",
+    --   	},
         ["plugin.googleSignIn"] = {
             publisherId = "tech.scotth",
             -- supportedPlatforms = { {iphone = true}, {android = true} } 
