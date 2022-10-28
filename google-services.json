@@ -1,0 +1,121 @@
+{
+  "project_info": {
+    "project_number": "157948540483",
+    "project_id": "pc-api-4779992040867084459-967",
+    "storage_bucket": "pc-api-4779992040867084459-967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157948540483:android:1f51aae46b8bade67686f6",
+        "android_client_info": {
+          "package_name": "app.sight.fire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157948540483-neml4ut0ith8fqoh7ta5p540v1fdv3lp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.sight.fire",
+            "certificate_hash": "0085f262a291f0d1ce9ee9fbcd1d50e7826dbe9d"
+          }
+        },
+        {
+          "client_id": "157948540483-bq1ivqmrt0q1l4vonaqkhv75p7fsle3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ44MsUDi14cASDCnb-T-mRcN_xSMvIAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157948540483-bq1ivqmrt0q1l4vonaqkhv75p7fsle3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157948540483:android:7e6a1254bb89bfec7686f6",
+        "android_client_info": {
+          "package_name": "com.levstudio.wikiphone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157948540483-g0gvc79elr49sr2i89gcmvmdcdqtdd5j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.levstudio.wikiphone",
+            "certificate_hash": "6a4af3d3c4991f64944bac3d36d0da43c7d0355b"
+          }
+        },
+        {
+          "client_id": "157948540483-bq1ivqmrt0q1l4vonaqkhv75p7fsle3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ44MsUDi14cASDCnb-T-mRcN_xSMvIAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157948540483-bq1ivqmrt0q1l4vonaqkhv75p7fsle3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:157948540483:android:6961ac6664d86f157686f6",
+        "android_client_info": {
+          "package_name": "com.levstudio.wikiphone.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "157948540483-1o5lm97uq5db441om5ksd091p4ove163.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.levstudio.wikiphone.test",
+            "certificate_hash": "0085f262a291f0d1ce9ee9fbcd1d50e7826dbe9d"
+          }
+        },
+        {
+          "client_id": "157948540483-bq1ivqmrt0q1l4vonaqkhv75p7fsle3r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ44MsUDi14cASDCnb-T-mRcN_xSMvIAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "157948540483-bq1ivqmrt0q1l4vonaqkhv75p7fsle3r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
