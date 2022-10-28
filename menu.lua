@@ -2414,6 +2414,7 @@ local function createPost()
       -- end
       photoForPost = {}
       createAllInstaPost()
+      q.event.group.on("home-popUp")
     end,
   })
   postCreateEventGroupName = eventGroupName
@@ -2443,7 +2444,7 @@ local function createPost()
   titleField.placeholder = "Заголовок поста"
   titleField.font = native.newFont( "fonts/hindv_b.ttf", 30 )
   titleField:resizeHeightToFitFont()
-  titleField:setTextColor( .5, .5, .5 )
+  titleField:setTextColor( 0, 0, 0 )
 
   local longField = native.newTextBox(65, titleField.y+titleField.height-10, back.width-120, 490)
   postCreateGroup:insert( longField )
@@ -2454,7 +2455,7 @@ local function createPost()
   longField.hasBackground = false
   longField.placeholder = "Описание поста"
   longField.font = native.newFont( "fonts/hindv_r.ttf", 30 )
-  longField:setTextColor( .5, .5, .5 )
+  longField:setTextColor( 0, 0, 0 )
 
   local space = 40
   local height = 90
@@ -2775,16 +2776,12 @@ local mainListGroup
 createAllInstaPost = function()
   if not allUsers then return end
   if mainListGroup~=nil then display.remove(mainListGroup.scrollGroup) display.remove(mainListGroup) mainListGroup = nil end
-  local minusButtonSize = 0
-  if account.status=="admin" then
-    minusButtonSize = 145
-  end
   local scrollView = widget.newScrollView(
   {
-    top = 110,
+    top = 100,
     left = 0,
     width = q.fullw,
-    height = q.fullh-175-minusButtonSize-60,
+    height = q.fullh-175-50,
     horizontalScrollDisabled = true,
     -- verticalScrollDisabled = true,
     hideBackground = true,
@@ -2812,20 +2809,22 @@ createAllInstaPost = function()
   local scrollEndPoint = display.newRect( mainListGroup, q.cx, mainListGroup.y + mainListGroup.height + 50, 20, 20)
   scrollEndPoint.alpha = 0
   
-  -- local bag = display.newText( {
-  --   text = q.printTable(allInstaPost), 
-  --   x = 10,
-  --   y = 100,
-  --   fontSize = 30
-  -- } )
-  -- bag:setFillColor( 0 )
-  -- bag.anchorX = 0
-  -- bag.anchorY = 0
 end
 
 
 function scene:create( event )
   print("menu state: CREATE")
+
+  local SCREEN_LEFT = display.screenOriginX
+  local SCREEN_RIGHT = display.contentWidth - display.screenOriginX
+  local SCREEN_WIDTH = SCREEN_RIGHT - SCREEN_LEFT
+  local SCREEN_CENTER_X = SCREEN_WIDTH/2 + SCREEN_LEFT
+
+  local SCREEN_TOP = display.topStatusBarContentHeight + display.screenOriginY
+  local SCREEN_BOTTOM = display.contentHeight - display.screenOriginY
+  local SCREEN_HEIGHT = SCREEN_BOTTOM - SCREEN_TOP
+  local SCREEN_CENTER_Y = SCREEN_HEIGHT/2 + SCREEN_TOP
+
 	local sceneGroup = self.view
 
 	backGroup = display.newGroup() -- Группа фоновых элементов
@@ -2878,11 +2877,19 @@ function scene:create( event )
 
   downNavigateGroup = display.newGroup()
   uiGroup:insert(downNavigateGroup)
+  -- downNavigateGroup.y = q.fullh - SCREEN_BOTTOM
 
   upNavigateGroup = display.newGroup()
   uiGroup:insert(upNavigateGroup)
 
-
+  local buttons = {}
+  local names = {
+    "home",
+    "subcribes",
+    "fire",
+    "stream",
+    "profile",
+  }
   do -- Н А В И Г А Ц И Я -- D O W N
     local downBack = display.newRect(downNavigateGroup, q.cx, q.fullh, q.fullw, 125)
     downBack.anchorY = 1
@@ -2897,14 +2904,7 @@ function scene:create( event )
     local size = downBack.height - spase - 16
     local buttonY = q.fullh-spase
 
-    local buttons = {}
-    local names = {
-      "home",
-      "subcribes",
-      "fire",
-      "stream",
-      "profile",
-    }
+    
     local diff = {
       [1] = 20,
       [2] = 10,
@@ -2983,12 +2983,23 @@ function scene:create( event )
     q.event.add("nothing",logo, function()
     end, "home-popUp")
 
-    pps.addMainScene("home", topMain)
-    q.event.group.on("home-popUp")
+    pps.addMainScene("home", topMain, {
+      onShow = function()
+        for i=1, #names do
+          buttons[names[i]][0].alpha = 1
+          buttons[names[i]][1].alpha = 0
+        end
+        buttons.home[0].alpha = 0
+        buttons.home[1].alpha = 1
+      end
+    })
   end
 
   -- -- ======= П О Д П И С К И ========= --
   do
+    local back = display.newRect( subGroup, q.cx, q.cy, q.fullw, q.fullh)
+    back.fill = c.backGround
+    
     local logo = display.newImageRect( subGroup, "img/logo.png",85*2,85*2 )
     logo.x, logo.y = 18*2 + 110, 18*2 - 20
     logo.anchorX = 0
@@ -2997,13 +3008,25 @@ function scene:create( event )
     q.event.add("nothing",logo, function()
     end, "subcribes-popUp")
 
-    pps.addMainScene( "subcribes", subGroup)
+    pps.addMainScene( "subcribes", subGroup, {
+      onShow = function()
+        for i=1, #names do
+          buttons[names[i]][0].alpha = 1
+          buttons[names[i]][1].alpha = 0
+        end
+        buttons.subcribes[0].alpha = 0
+        buttons.subcribes[1].alpha = 1
+      end
+    })
     q.event.group.on("subcribes-popUp")
   end
 
   -- -- ======= К О С Т Ё Р ========== --
   do
-   local logo = display.newImageRect( fireGroup, "img/logo.png",85*2,85*2 )
+    local back = display.newRect( fireGroup, q.cx, q.cy, q.fullw, q.fullh)
+    back.fill = c.backGround
+
+    local logo = display.newImageRect( fireGroup, "img/logo.png",85*2,85*2 )
     logo.x, logo.y = 18*2 + 210, 18*2 - 20
     logo.anchorX = 0
     logo.anchorY = 0
@@ -3011,13 +3034,25 @@ function scene:create( event )
     q.event.add("nothing",logo, function()
     end, "fire-popUp")
 
-    pps.addMainScene( "fire", fireGroup)
+    pps.addMainScene( "fire", fireGroup, {
+      onShow = function()
+        for i=1, #names do
+          buttons[names[i]][0].alpha = 1
+          buttons[names[i]][1].alpha = 0
+        end
+        buttons.fire[0].alpha = 0
+        buttons.fire[1].alpha = 1
+      end
+    })
     q.event.group.on("fire-popUp")
   end
 
   -- -- ======= С Т Р И М Ы ========== --
   do
-   local logo = display.newImageRect( streamGroup, "img/logo.png",85*2,85*2 )
+    local back = display.newRect( streamGroup, q.cx, q.cy, q.fullw, q.fullh)
+    back.fill = c.backGround
+
+    local logo = display.newImageRect( streamGroup, "img/logo.png",85*2,85*2 )
     logo.x, logo.y = 18*2 + 210, 18*2 - 20+100
     logo.anchorX = 0
     logo.anchorY = 0
@@ -3025,7 +3060,16 @@ function scene:create( event )
     q.event.add("nothing",logo, function()
     end, "stream-popUp")
 
-    pps.addMainScene( "stream", streamGroup)
+    pps.addMainScene( "stream", streamGroup, {
+      onShow = function()
+        for i=1, #names do
+          buttons[names[i]][0].alpha = 1
+          buttons[names[i]][1].alpha = 0
+        end
+        buttons.stream[0].alpha = 0
+        buttons.stream[1].alpha = 1
+      end
+    })
     q.event.group.on("stream-popUp")
   end
 
@@ -3037,12 +3081,22 @@ function scene:create( event )
     local button = createOrangeButton( profileGroup, 230, "Выйти")
 
     q.event.add("logOut",button, function()
-        q.saveLogin({needGoogleOut=account.google})
+        q.saveLogin({})
         composer.gotoScene( "signin" )
+        composer.setVariable( "googleOut", account.google )
         composer.removeScene( "menu" )
       end, "profile-popUp")
 
-    pps.addMainScene( "profile", profileGroup)
+    pps.addMainScene( "profile", profileGroup, {
+      onShow = function()
+        for i=1, #names do
+          buttons[names[i]][0].alpha = 1
+          buttons[names[i]][1].alpha = 0
+        end
+        buttons.profile[0].alpha = 0
+        buttons.profile[1].alpha = 1
+      end
+    })
     q.event.group.on("profile-popUp")
   end
 

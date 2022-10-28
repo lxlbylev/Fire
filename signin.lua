@@ -1106,11 +1106,10 @@ function scene:show( event )
 			composer.removeScene( "signin" )
 		else
   		network.request( jsonLink, "GET", loadAllUsers )
-			if accountInfo.needGoogleOut==true then
-				timer.performWithDelay( 1000,function()
+			if  composer.getVariable( "googleOut")==true then
+				-- timer.performWithDelay( 1000,function()
 					googleSignIn.signOut()
-					q.saveLogin({})
-				end )
+				-- end )
 			end
 			-- signUpMenu()
 			-- signInMenu()

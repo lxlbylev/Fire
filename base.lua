@@ -326,7 +326,7 @@ local base = {
       end
     end,
     remove = function(eventName,groupName)
-      -- print("REMOVE event - "..eventName)
+      print("REMOVE event - "..eventName)
 
       local event = events[eventName]
       if event==nil then error("Remove event: bad argument #1 (event '"..eventName.."' not found)") end
@@ -370,7 +370,7 @@ local base = {
           local name = events[groupName][i]
           local event = events[name]
           events.eventOn = enable or true
-          -- print(name,"is on now")
+          print(name,"is on now")
           -- print(a.."#group "..groupName.." enable "..name)
           event.but:addEventListener("tap", event.func)
         end
